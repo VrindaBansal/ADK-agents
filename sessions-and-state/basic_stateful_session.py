@@ -2,14 +2,15 @@ import uuid
 
 from dotenv import load_dotenv
 from google.adk.runners import Runner
-from google.adk.sessions import InMemorySessionService
+from google.adk.sessions import DatabaseSessionService  # changed from InMemorySessionService
 from google.genai import types
 from med_assistant.medical_agent import medical_agent
 
 load_dotenv()
 
-session_service_stateful = InMemorySessionService()
+session_service_stateful = DatabaseSessionService(db_url="sqlite:///./medical_sessions.db")
 
+# Everything else stays exactly the same
 initial_state = {
     "user_name": "Sahaj Bansal",
     "user_information": """
@@ -65,3 +66,5 @@ session = session_service_stateful.get_session(
 print("=== Final Session State ===")
 for key, value in session.state.items():
     print(f"{key}: {value}")
+
+print("Session saved to database: medical_sessions.db")
