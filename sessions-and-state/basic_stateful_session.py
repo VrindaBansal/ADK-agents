@@ -10,7 +10,6 @@ load_dotenv()
 
 session_service_stateful = DatabaseSessionService(db_url="sqlite:///./medical_sessions.db")
 
-# Everything else stays exactly the same
 initial_state = {
     "user_name": "Sahaj Bansal",
     "user_information": """
